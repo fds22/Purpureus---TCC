@@ -129,15 +129,15 @@ $usuario = $resultado->fetch_assoc();
                     </form>
                 </div>
             </div>
-            
+
             <div class="content-section" id="addresses">
                 <h2 class="section-title">Meus Endereços</h2>
                 <div class="account-card">
                     <div class="addresses-container">
                         <div class="address-card">
                             <div class="address-header">
-                                <h3>Endereço Principal</h3>
-                                <span class="address-badge default">Principal</span>
+                                <h3></h3>
+                                <span class="address-badge default"></span>
                             </div>
                             <div class="address-body">
                                 
@@ -147,21 +147,6 @@ $usuario = $resultado->fetch_assoc();
                                 <button class="address-btn delete-btn"><i class="fas fa-trash"></i> Excluir</button>
                             </div>
                         </div>
-                        
-                        <div class="address-card">
-                            <div class="address-header">
-                                <h3>Endereço do Trabalho</h3>
-                            </div>
-                            <div class="address-body">
-                                
-                            </div>
-                            <div class="address-actions">
-                                <button class="address-btn edit-btn"><i class="fas fa-edit"></i> Editar</button>
-                                <button class="address-btn delete-btn"><i class="fas fa-trash"></i> Excluir</button>
-                                <button class="address-btn default-btn"><i class="fas fa-home"></i> Definir como principal</button>
-                            </div>
-                        </div>
-                        
                         <div class="add-address">
                             <button id="add-address-btn" class="btn-secondary">
                                 <i class="fas fa-plus"></i> Adicionar Novo Endereço
@@ -322,68 +307,241 @@ $usuario = $resultado->fetch_assoc();
     </footer>
 
     <script>
-        // Toggle entre seções da conta
-        document.querySelectorAll('.account-menu li').forEach(item => {
-            item.addEventListener('click', function() {
-                // Remove a classe active de todos os itens do menu
-                document.querySelectorAll('.account-menu li').forEach(menuItem => {
-                    menuItem.classList.remove('active');
-                });
-                
-                // Adiciona a classe active ao item clicado
-                this.classList.add('active');
-                
-                // Esconde todas as seções de conteúdo
-                document.querySelectorAll('.content-section').forEach(section => {
-                    section.classList.remove('active');
-                });
-                
-                // Identifica qual seção mostrar baseado no texto do link
-                const linkText = this.querySelector('a').textContent.trim();
-                
-                if (linkText.includes('Dados Pessoais')) {
-                    document.getElementById('personal-data').classList.add('active');
-                } else if (linkText.includes('Endereços')) {
-                    document.getElementById('addresses').classList.add('active');
-                }
+    // Toggle entre seções da conta
+    document.querySelectorAll('.account-menu li').forEach(item => {
+        item.addEventListener('click', function() {
+            // Remove a classe active de todos os itens do menu
+            document.querySelectorAll('.account-menu li').forEach(menuItem => {
+                menuItem.classList.remove('active');
             });
-        });
-        
-        // Mostrar/ocultar formulário de novo endereço
-        document.getElementById('add-address-btn').addEventListener('click', function() {
-            document.getElementById('address-form').style.display = 'block';
-            this.parentElement.style.display = 'none';
-        });
-        
-        document.getElementById('cancel-address').addEventListener('click', function() {
-            document.getElementById('address-form').style.display = 'none';
-            document.querySelector('.add-address').style.display = 'block';
-        });
-        
-        // Simular a busca de CEP
-        document.getElementById('search-cep').addEventListener('click', function() {
-            const cep = document.getElementById('cep').value.replace(/\D/g, '');
             
-            if (cep.length !== 8) {
-                alert('Por favor, insira um CEP válido.');
-                return;
-            }
+            // Adiciona a classe active ao item clicado
+            this.classList.add('active');
             
-            // Simulação de preenchimento automático
-            // Em um ambiente real, seria feita uma requisição para uma API de CEP
-            if (cep === '01310100') {
-                document.getElementById('street').value = 'Avenida Paulista';
-                document.getElementById('neighborhood').value = 'Bela Vista';
-                document.getElementById('city').value = 'São Paulo';
-                document.getElementById('state').value = 'SP';
-            } else {
-                alert('CEP encontrado! Preencha o número e complemento.');
-                document.getElementById('street').value = 'Rua Exemplo';
-                document.getElementById('neighborhood').value = 'Bairro Exemplo';
-                document.getElementById('city').value = 'Cidade Exemplo';
-                document.getElementById('state').value = 'SP';
+            // Esconde todas as seções de conteúdo
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Identifica qual seção mostrar baseado no texto do link
+            const linkText = this.querySelector('a').textContent.trim();
+            
+            if (linkText.includes('Dados Pessoais')) {
+                document.getElementById('personal-data').classList.add('active');
+            } else if (linkText.includes('Endereços')) {
+                document.getElementById('addresses').classList.add('active');
             }
         });
-    </script>
+    });
+    
+    // Mostrar/ocultar formulário de novo endereço
+    document.getElementById('add-address-btn').addEventListener('click', function() {
+        document.getElementById('address-form').style.display = 'block';
+        this.parentElement.style.display = 'none';
+        // Limpar campos quando abrir o formulário
+        clearAddressForm();
+    });
+    
+    document.getElementById('cancel-address').addEventListener('click', function() {
+        document.getElementById('address-form').style.display = 'none';
+        document.querySelector('.add-address').style.display = 'block';
+        clearAddressForm();
+    });
+    
+    // Limpar formulário de endereço
+    function clearAddressForm() {
+        document.getElementById('address-name').value = '';
+        document.getElementById('cep').value = ''
+        document.getElementById('street').value = '';
+        document.getElementById('number').value = '';
+        document.getElementById('complement').value = '';
+        document.getElementById('neighborhood').value = '';
+        document.getElementById('city').value = '';
+        document.getElementById('state').value = '';
+        document.getElementById('default-address').checked = false;
+    }
+    
+    // Busca de CEP real usando API
+    document.getElementById('search-cep').addEventListener('click', searchCep);
+    document.getElementById('cep').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            searchCep();
+            e.preventDefault();
+        }
+    });
+    
+    function searchCep() {
+        const cepInput = document.getElementById('cep');
+        let cep = cepInput.value.replace(/\D/g, '');
+    
+
+        
+        if (!/^\d{8}$/.test(cep)) {
+            showAddressError('CEP inválido. Digite 8 números.');
+            return;
+        }
+        
+        // Mostrar loading
+        const searchBtn = document.getElementById('search-cep');
+        const originalBtnText = searchBtn.innerHTML;
+        searchBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Buscando...';
+        searchBtn.disabled = true;
+        
+        // Fazer requisição para a API de CEP
+        fetch(`../consulta_controller/api/consulta-cep/${cep}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro na requisição');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.erro) {
+                    throw new Error('CEP não encontrado');
+                }
+                
+                // Preencher os campos com os dados retornados
+                document.getElementById('street').value = data.logradouro || '';
+                document.getElementById('neighborhood').value = data.bairro || '';
+                document.getElementById('city').value = data.localidade || '';
+                document.getElementById('state').value = data.uf || '';
+                
+                // Focar no campo número
+                document.getElementById('number').focus();
+                
+                // Esconder mensagens de erro
+                hideAddressError();
+            })
+            .catch(error => {
+                showAddressError('CEP não encontrado. Verifique o número digitado.');
+                console.error('Erro ao buscar CEP:', error);
+            })
+            .finally(() => {
+                // Restaurar o botão
+                searchBtn.innerHTML = originalBtnText;
+                searchBtn.disabled = false;
+            });
+    }
+    
+    function showAddressError(message) {
+        hideAddressError();
+        
+        const errorElement = document.createElement('div');
+        errorElement.className = 'cep-error';
+        errorElement.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${message}`;
+        
+        const cepGroup = document.querySelector('.cep-input-group');
+        cepGroup.parentNode.insertBefore(errorElement, cepGroup.nextSibling);
+        
+        // Destacar campo inválido
+        document.getElementById('cep').classList.add('input-error');
+    }
+    
+    function hideAddressError() {
+        const existingError = document.querySelector('.cep-error');
+        if (existingError) {
+            existingError.remove();
+        }
+        document.getElementById('cep').classList.remove('input-error');
+    }
+    
+    // Formatar CEP automaticamente
+    document.getElementById('cep').addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, '');
+        
+        if (value.length > 5) {
+            value = value.replace(/^(\d{5})(\d)/, '$1-$2');
+        }
+        
+        e.target.value = value.substring(0, 9);
+    });
+    
+    // Salvar endereço (simulação)
+    document.querySelector('.address-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const addressName = document.getElementById('address-name').value;
+        const cep = document.getElementById('cep').value;
+        const street = document.getElementById('street').value;
+        const number = document.getElementById('number').value;
+        
+        if (!addressName || !cep || !street || !number) {
+            showAddressError('Por favor, preencha todos os campos obrigatórios.');
+            return;
+        }
+        
+        // Simulação: Adicionar novo endereço à lista
+        const newAddress = {
+            name: addressName,
+            street: street,
+            number: number,
+            complement: document.getElementById('complement').value,
+            neighborhood: document.getElementById('neighborhood').value,
+            city: document.getElementById('city').value,
+            state: document.getElementById('state').value,
+            cep: cep,
+            isDefault: document.getElementById('default-address').checked
+        };
+        
+        addAddressToUI(newAddress);
+        
+        // Fechar formulário
+        document.getElementById('address-form').style.display = 'none';
+        document.querySelector('.add-address').style.display = 'block';
+        clearAddressForm();
+        
+        // Mostrar mensagem de sucesso
+        showAddressSuccess('Endereço adicionado com sucesso!');
+    });
+    
+    function addAddressToUI(address) {
+        const addressCard = document.createElement('div');
+        addressCard.className = 'address-card';
+        addressCard.innerHTML = `
+            <div class="address-header">
+                <h3>${address.name}</h3>
+                ${address.isDefault ? '<span class="address-badge default">Principal</span>' : ''}
+            </div>
+            <div class="address-body">
+                <p>${address.street}, ${address.number}${address.complement ? ', ' + address.complement : ''}</p>
+                <p>${address.neighborhood}</p>
+                <p>${address.city} - ${address.state}</p>
+                <p>CEP: ${address.cep}</p>
+            </div>
+            <div class="address-actions">
+                <button class="address-btn edit-btn"><i class="fas fa-edit"></i> Editar</button>
+                <button class="address-btn delete-btn"><i class="fas fa-trash"></i> Excluir</button>
+            </div>
+        `;
+        
+        document.querySelector('.addresses-container').insertBefore(addressCard, document.querySelector('.add-address'));
+    }
+    
+    function showAddressSuccess(message) {
+        const successElement = document.createElement('div');
+        successElement.className = 'cep-success';
+        successElement.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
+        
+        const sectionTitle = document.querySelector('#addresses .section-title');
+        sectionTitle.parentNode.insertBefore(successElement, sectionTitle.nextSibling);
+        
+        setTimeout(() => {
+            successElement.remove();
+        }, 3000);
+    }
+    
+    // Preencher formulário de dados pessoais com informações do usuário
+    window.addEventListener('DOMContentLoaded', () => {
+        const nomeInput = document.getElementById('nome');
+        const sobrenomeInput = document.getElementById('sobrenome');
+        const emailInput = document.getElementById('email');
+        
+        <?php if(isset($usuario)): ?>
+            nomeInput.value = "<?php echo htmlspecialchars($usuario['nome'] ?? ''); ?>";
+            sobrenomeInput.value = "<?php echo htmlspecialchars($usuario['sobrenome'] ?? ''); ?>";
+            emailInput.value = "<?php echo htmlspecialchars($usuario['email'] ?? ''); ?>";
+        <?php endif; ?>
+    });
+</script>
 </body>
 </html>

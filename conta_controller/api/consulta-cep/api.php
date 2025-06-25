@@ -26,5 +26,11 @@ if ($response === FALSE) {
     exit;
 }
 
-// Retorna o JSON diretamente
+$dados = json_decode($response, true);
+
+if (isset($dados['erro']) && $dados['erro']) {
+    echo json_encode(['erro' => 'CEP não encontrado']);
+    exit;
+}
+
 echo $response;
