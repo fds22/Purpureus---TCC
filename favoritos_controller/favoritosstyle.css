@@ -1,0 +1,322 @@
+/* * Estilos para a página de favoritos */
+
+.page-header {
+    background-color: var(--roxo-palido);
+    padding: 40px 0;
+    text-align: center;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.page-header h1 {
+    font-size: 2.5rem;
+    color: var(--roxo-escuro);
+    margin-bottom: 10px;
+}
+
+.breadcrumb {
+    color: var(--cinza-escuro);
+    font-size: 0.9rem;
+}
+
+.breadcrumb a {
+    color: var(--roxo-medio);
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+.favoritos-section {
+    padding: 60px 0;
+    background-color: var(--white);
+}
+
+.favoritos-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--cinza-medio);
+}
+
+.favoritos-header h2 {
+    font-size: 1.8rem;
+    color: var(--roxo-escuro);
+}
+
+.favoritos-count {
+    color: var(--cinza-escuro);
+    font-weight: 400;
+}
+
+.favoritos-actions {
+    display: flex;
+    gap: 15px;
+}
+
+.favoritos-actions button {
+    font-size: 0.9rem;
+    padding: 8px 15px;
+}
+
+.favoritos-actions btn-secondary:hover{
+    background-color: var(--roxo-medio);
+    color: var(--white);
+    cursor: pointer;
+}
+.favoritos-actions button i {
+    margin-right: 5px;
+}
+
+.delete-all {
+    border-color: #e53935;
+    color: #e53935;
+}
+
+.delete-all:hover {
+    background-color: #e53935;
+    color: var(--white);
+    cursor: pointer;
+}
+
+.favoritos-empty {
+    text-align: center;
+    padding: 60px 0;
+}
+
+.empty-icon {
+    font-size: 5rem;
+    color: var(--cinza-medio);
+    margin-bottom: 20px;
+}
+
+.favoritos-empty h3 {
+    font-size: 1.8rem;
+    color: var(--roxo-escuro);
+    margin-bottom: 10px;
+}
+
+.favoritos-empty p {
+    color: var(--cinza-escuro);
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.favoritos-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.favorito-card {
+    background-color: var(--white);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    position: relative;
+    border: 1px solid var(--cinza-medio);
+}
+
+.favorito-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(75, 0, 130, 0.15);
+}
+
+.favorito-actions {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 10;
+}
+
+.remove-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #e53935;
+    transition: all 0.3s ease;
+}
+
+.remove-btn:hover {
+    background-color: #e53935;
+    color: var(--white);
+}
+
+.favorito-image {
+    position: relative;
+    overflow: hidden;
+    height: 300px;
+}
+
+.favorito-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.favorito-card:hover .favorito-image img {
+    transform: scale(1.05);
+}
+
+.favorito-info {
+    padding: 20px;
+}
+
+.favorito-info h3 {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    color: var(--black);
+    transition: color 0.3s ease;
+}
+
+.favorito-card:hover .favorito-info h3 {
+    color: var(--roxo-escuro);
+}
+
+.favorito-info p {
+    color: var(--cinza-escuro);
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.favorito-info p:hover {
+    color: var(--roxo-medio);
+}
+
+.favorito-info button{
+    background-color: var(--roxo-medio);
+    color: var(--white);
+    font-size: 0.9rem;
+    padding: 10px 15px;
+    border-radius: 15px;
+    border: none;
+    cursor: pointer;
+}
+
+.favorito-info button:hover {
+    background-color: var(--roxo-escuro);
+}
+
+.favorito-category {
+    color: var(--cinza-escuro);
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.favorito-price {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--roxo-escuro);
+    margin-bottom: 15px;
+}
+
+.favorito-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.add-to-cart {
+    width: 100%;
+    padding: 10px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-to-cart i {
+    margin-right: 8px;
+}
+
+.favoritos-footer {
+    margin-top: 50px;
+}
+
+.recomendados h3 {
+    font-size: 1.8rem;
+    color: var(--roxo-escuro);
+    margin-bottom: 30px;
+    text-align: center;
+    position: relative;
+}
+
+.recomendados h3::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background-color: var(--roxo-medio);
+    margin: 15px auto 0;
+}
+
+.recomendados-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin: 0 auto;
+    max-width: 600px;
+}
+
+/* * Adicione a classe active para o ícone do coração no header */
+.icons .icon.active {
+    color: var(--roxo-medio);
+}
+
+/* * Responsividade */
+@media (max-width: 1200px) {
+    .favoritos-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 992px) {
+    .favoritos-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .favoritos-header {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 768px) {
+    .recomendados-grid {
+        grid-template-columns: 1fr;
+        max-width: 300px;
+    }
+
+    .favoritos-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 576px) {
+    .favoritos-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .page-header h1 {
+        font-size: 2rem;
+    }
+}

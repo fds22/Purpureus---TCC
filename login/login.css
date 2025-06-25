@@ -1,0 +1,321 @@
+/* * Importando fontes do Google */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;700&display=swap');
+
+/* * Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* * Variáveis de cores */
+:root {
+    --purple-dark: #4B0082;      /* * Roxo escuro */
+    --purple-medium: #8A2BE2;    /* * Roxo médio */
+    --purple-light: #9370DB;     /* * Roxo claro */
+    --purple-pale: #E6E6FA;      /* * Roxo bem claro, quase branco */
+    --black: #121212;            /* * Preto */
+    --white: #FFFFFF;            /* * Branco */
+    --gray-light: #F5F5F5;       /* * Cinza claro */
+    --gray-medium: #E0E0E0;      /* * Cinza médio */
+    --gray-dark: #757575;        /* * Cinza escuro */
+}
+
+/* * Estilos Gerais */
+body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--black);
+    background-color: var(--gray-light);
+    line-height: 1.6;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+}
+
+/* * Container principal */
+.container {
+    display: flex;
+    width: 900px;
+    height: 600px;
+    background-color: var(--white);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* * Container de login */
+.login-container {
+    flex: 1;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* * Brand/Logo */
+.brand {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.brand h1 {
+    font-size: 2.2rem;
+    color: var(--purple-dark);
+    letter-spacing: 2px;
+}
+
+.tagline {
+    font-size: 0.8rem;
+    color: var(--gray-dark);
+    font-style: italic;
+    margin-top: -5px;
+}
+
+/* * Título do formulário */
+.form-title {
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+    color: var(--black);
+    text-align: center;
+}
+
+/* * Formulário */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+/* * Grupos de input */
+.input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon {
+    position: absolute;
+    left: 15px;
+    color: var(--gray-dark);
+}
+
+.toggle-password {
+    position: absolute;
+    right: 15px;
+    color: var(--gray-dark);
+    cursor: pointer;
+}
+
+.toggle-password:hover {
+    color: var(--purple-medium);
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 40px;
+    border: 1px solid var(--gray-medium);
+    border-radius: 30px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: var(--purple-medium);
+    box-shadow: 0 0 0 2px rgba(138, 43, 226, 0.1);
+}
+
+/* * Opções do formulário */
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.remember-me input[type="checkbox"] {
+    accent-color: var(--purple-medium);
+}
+
+.forgot-password {
+    color: var(--purple-medium);
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+/* * Botão de login */
+.btn-login {
+    background: linear-gradient(to right, var(--purple-dark), var(--purple-medium));
+    color: var(--white);
+    padding: 12px;
+    border: none;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+.btn-login:hover {
+    background: linear-gradient(to right, var(--purple-medium), var(--purple-dark));
+    box-shadow: 0 5px 15px rgba(75, 0, 130, 0.3);
+    transform: translateY(-2px);
+}
+
+/* * Login com redes sociais */
+.social-login {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.social-login p {
+    font-size: 0.9rem;
+    color: var(--gray-dark);
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.social-login p::before,
+.social-login p::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 80px;
+    height: 1px;
+    background-color: var(--gray-medium);
+}
+
+.social-login p::before {
+    left: 0;
+}
+
+.social-login p::after {
+    right: 0;
+}
+
+.social-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--gray-light);
+    color: var(--black);
+    transition: all 0.3s ease;
+}
+
+.social-btn:hover {
+    transform: translateY(-3px);
+}
+
+.social-btn.facebook {
+    background-color: #3b5998;
+    color: var(--white);
+}
+
+.social-btn.google {
+    background-color: #db4437;
+    color: var(--white);
+}
+
+.social-btn.apple {
+    background-color: var(--black);
+    color: var(--white);
+}
+
+/* * Link para cadastro */
+.register-link {
+    margin-top: 1rem;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.register-link a {
+    color: var(--purple-medium);
+    font-weight: 600;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
+
+/* * Container da imagem */
+.image-container {
+    flex: 1.2;
+    background-image: url('/api/placeholder/450/600');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(75, 0, 130, 0.7), rgba(138, 43, 226, 0.4));
+}
+
+/* * Responsividade */
+@media (max-width: 900px) {
+    .container {
+        width: 90%;
+        height: auto;
+        flex-direction: column-reverse;
+    }
+
+    .image-container {
+        height: 200px;
+    }
+
+    .login-container {
+        padding: 30px 20px;
+    }
+
+    .social-login p::before,
+    .social-login p::after {
+        width: 60px;
+    }
+}
+
+@media (max-width: 500px) {
+    .form-options {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .social-login p::before,
+    .social-login p::after {
+        width: 40px;
+    }
+}

@@ -1,0 +1,384 @@
+/* Importando fontes do Google */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;700&display=swap');
+
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Variáveis de cores */
+:root {
+    --purple-dark: #4B0082;
+    --purple-medium: #8A2BE2;
+    --purple-light: #9370DB;
+    --purple-pale: #E6E6FA;
+    --black: #121212;
+    --white: #FFFFFF;
+    --gray-light: #F5F5F5;
+    --gray-medium: #E0E0E0;
+    --gray-dark: #757575;
+    --red-error: #DC3545;
+    --admin-gold: #FFD700;
+    --admin-dark: #2C1810;
+}
+
+/* Estilos Gerais */
+body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--black);
+    background: linear-gradient(135deg, var(--purple-dark), var(--admin-dark));
+    line-height: 1.6;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+}
+
+/* Container principal */
+.container {
+    display: flex;
+    width: 900px;
+    height: 600px;
+    background-color: var(--white);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(255, 215, 0, 0.3);
+}
+
+/* Container de login */
+.login-container {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(135deg, var(--white), var(--purple-pale));
+}
+
+/* Brand/Logo */
+.brand {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.brand h1 {
+    font-size: 2.2rem;
+    color: var(--purple-dark);
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tagline {
+    font-size: 0.9rem;
+    color: var(--admin-gold);
+    font-weight: 600;
+    margin-top: -5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Badge de administrador */
+.admin-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: linear-gradient(45deg, var(--admin-gold), #FFA500);
+    color: var(--admin-dark);
+    padding: 8px 20px;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    margin: 0 auto 20px auto;
+    width: fit-content;
+    box-shadow: 0 4px 10px rgba(255, 215, 0, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.admin-badge i {
+    font-size: 1rem;
+}
+
+/* Título do formulário */
+.form-title {
+    font-size: 1.6rem;
+    margin-bottom: 25px;
+    color: var(--purple-dark);
+    text-align: center;
+}
+
+/* Formulário */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex-grow: 1;
+}
+
+/* Grupos de input */
+.input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon {
+    position: absolute;
+    left: 15px;
+    color: var(--purple-medium);
+    z-index: 2;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 15px;
+    color: var(--gray-dark);
+    cursor: pointer;
+    z-index: 2;
+    transition: color 0.3s ease;
+}
+
+.toggle-password:hover {
+    color: var(--purple-medium);
+}
+
+.input-group input {
+    width: 100%;
+    padding: 15px 45px;
+    border: 2px solid var(--gray-medium);
+    border-radius: 30px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: var(--purple-medium);
+    box-shadow: 0 0 0 3px rgba(138, 43, 226, 0.15);
+    background: var(--white);
+}
+
+.input-group input::placeholder {
+    color: var(--gray-dark);
+}
+
+/* Mensagem de erro */
+.error {
+    background-color: var(--red-error);
+    color: var(--white);
+    padding: 12px 20px;
+    border-radius: 25px;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin: 10px 0;
+    animation: slideInDown 0.3s ease;
+}
+
+@keyframes slideInDown {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Botão de login */
+.btn-login {
+    background: linear-gradient(45deg, var(--purple-dark), var(--purple-medium), var(--admin-gold));
+    background-size: 300% 300%;
+    color: var(--white);
+    padding: 15px;
+    border: none;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    animation: gradientShift 3s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.btn-login:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(75, 0, 130, 0.4);
+    animation-duration: 1s;
+}
+
+.btn-login:active {
+    transform: translateY(-1px);
+}
+
+/* Link de volta ao site */
+.back-to-site {
+    margin-top: auto;
+    text-align: center;
+    padding-top: 20px;
+}
+
+.back-to-site a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--purple-medium);
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.back-to-site a:hover {
+    background-color: rgba(138, 43, 226, 0.1);
+    transform: translateX(-3px);
+}
+
+/* Container da imagem */
+.image-container {
+    flex: 1.2;
+    background: linear-gradient(135deg, var(--purple-dark), var(--admin-dark));
+    position: relative;
+    overflow: hidden;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, 
+        rgba(75, 0, 130, 0.8), 
+        rgba(44, 24, 16, 0.6),
+        rgba(255, 215, 0, 0.1)
+    );
+}
+
+/* Padrão decorativo para admin */
+.admin-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pattern-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 30px;
+    opacity: 0.3;
+}
+
+.pattern-dot {
+    width: 20px;
+    height: 20px;
+    background: var(--admin-gold);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.pattern-dot:nth-child(even) {
+    animation-delay: 0.5s;
+}
+
+.pattern-dot:nth-child(3n) {
+    animation-delay: 1s;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.3;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 0.8;
+    }
+}
+
+/* Responsividade */
+@media (max-width: 900px) {
+    .container {
+        width: 95%;
+        height: auto;
+        flex-direction: column-reverse;
+        margin: 20px;
+    }
+
+    .image-container {
+        height: 150px;
+    }
+
+    .login-container {
+        padding: 30px 25px;
+    }
+
+    .admin-badge {
+        font-size: 0.8rem;
+        padding: 6px 16px;
+    }
+}
+
+@media (max-width: 500px) {
+    .container {
+        margin: 10px;
+        border-radius: 10px;
+    }
+
+    .login-container {
+        padding: 25px 20px;
+    }
+
+    .brand h1 {
+        font-size: 1.8rem;
+    }
+
+    .form-title {
+        font-size: 1.4rem;
+    }
+
+    .input-group input {
+        padding: 12px 40px;
+    }
+
+    .btn-login {
+        padding: 12px;
+        font-size: 0.9rem;
+    }
+}
