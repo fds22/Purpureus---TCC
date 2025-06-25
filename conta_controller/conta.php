@@ -134,19 +134,6 @@ $usuario = $resultado->fetch_assoc();
                 <h2 class="section-title">Meus Endereços</h2>
                 <div class="account-card">
                     <div class="addresses-container">
-                        <div class="address-card">
-                            <div class="address-header">
-                                <h3></h3>
-                                <span class="address-badge default"></span>
-                            </div>
-                            <div class="address-body">
-                                
-                            </div>
-                            <div class="address-actions">
-                                <button class="address-btn edit-btn"><i class="fas fa-edit"></i> Editar</button>
-                                <button class="address-btn delete-btn"><i class="fas fa-trash"></i> Excluir</button>
-                            </div>
-                        </div>
                         <div class="add-address">
                             <button id="add-address-btn" class="btn-secondary">
                                 <i class="fas fa-plus"></i> Adicionar Novo Endereço
@@ -370,58 +357,57 @@ $usuario = $resultado->fetch_assoc();
         }
     });
     
-    function searchCep() {
-        const cepInput = document.getElementById('cep');
-        let cep = cepInput.value.replace(/\D/g, '');
+    // Função searchCep corrigida
+function searchCep() {
+    const cepInput = document.getElementById('cep');
+    let cep = cepInput.value.replace(/\D/g, '');
     
-
-        
-        if (!/^\d{8}$/.test(cep)) {
-            showAddressError('CEP inválido. Digite 8 números.');
-            return;
-        }
-        
-        // Mostrar loading
-        const searchBtn = document.getElementById('search-cep');
-        const originalBtnText = searchBtn.innerHTML;
-        searchBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Buscando...';
-        searchBtn.disabled = true;
-        
-        // Fazer requisição para a API de CEP
-        fetch(`/api/consulta-cep/api.php?cep=${cep}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Erro na requisição');
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data.erro) {
-                    throw new Error('CEP não encontrado');
-                }
-                
-                // Preencher os campos com os dados retornados
-                document.getElementById('street').value = data.logradouro || '';
-                document.getElementById('neighborhood').value = data.bairro || '';
-                document.getElementById('city').value = data.localidade || '';
-                document.getElementById('state').value = data.uf || '';
-                
-                // Focar no campo número
-                document.getElementById('number').focus();
-                
-                // Esconder mensagens de erro
-                hideAddressError();
-            })
-            .catch(error => {
-                showAddressError('CEP não encontrado. Verifique o número digitado.');
-                console.error('Erro ao buscar CEP:', error);
-            })
-            .finally(() => {
-                // Restaurar o botão
-                searchBtn.innerHTML = originalBtnText;
-                searchBtn.disabled = false;
-            });
+    if (!/^\d{8}$/.test(cep)) {
+        showAddressError('CEP inválido. Digite 8 números.');
+        return;
     }
+    
+    // Mostrar loading
+    const searchBtn = document.getElementById('search-cep');
+    const originalBtnText = searchBtn.innerHTML;
+    searchBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Buscando...';
+    searchBtn.disabled = true;
+    
+    
+    fetch(`/api/consulta-cep/api.php?cep=${cep}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro na requisição');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.erro) {
+                throw new Error('CEP não encontrado');
+            }
+            
+            // Preencher os campos com os dados retornados
+            document.getElementById('street').value = data.logradouro || '';
+            document.getElementById('neighborhood').value = data.bairro || '';
+            document.getElementById('city').value = data.localidade || '';
+            document.getElementById('state').value = data.uf || '';
+            
+            // Focar no campo número
+            document.getElementById('number').focus();
+            
+            // Esconder mensagens de erro
+            hideAddressError();
+        })
+        .catch(error => {
+            showAddressError('CEP não encontrado. Verifique o número digitado.');
+            console.error('Erro ao buscar CEP:', error);
+        })
+        .finally(() => {
+            // Restaurar o botão
+            searchBtn.innerHTML = originalBtnText;
+            searchBtn.disabled = false;
+        });
+}
     
     function showAddressError(message) {
         hideAddressError();
