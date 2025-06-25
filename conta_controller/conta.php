@@ -388,7 +388,7 @@ $usuario = $resultado->fetch_assoc();
         searchBtn.disabled = true;
         
         // Fazer requisição para a API de CEP
-        fetch(`../consulta_controller/api/consulta-cep/${cep}`)
+        fetch(`/api/consulta-cep/api.php?cep=${cep}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Erro na requisição');
