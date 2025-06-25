@@ -58,84 +58,78 @@ $usuario = $resultado->fetch_assoc();
         </div>
     </header>
                                 <!-- DADOS PESSOAS-->      
-                        <div class="account-container">
-                        <div class="sidebar">
-                        <div class="user-info">
-                            <div class="user-avatar">
-                                <img src="/api/placeholder/100/100" alt="Foto do Usuário">
-                                <div class="edit-avatar">
-                                    <i class="fas fa-camera"></i>
-                                </div>
-                            </div>
-                            <h3>Olá, <?php echo htmlspecialchars($usuario['nome'] . ' ' . $usuario['sobrenome']); ?></h3>
-                            <p><?php echo htmlspecialchars($usuario['email']); ?></p>
-                        </div>
-                        <ul class="account-menu">
-                            <li class="active"><a href="#"><i class="fas fa-user-circle"></i> Dados Pessoais</a></li>
-                            <li><a href="#"><i class="fas fa-map-marker-alt"></i> Endereços</a></li>
-                            <li><a href="#"><i class="fas fa-shopping-bag"></i> Meus Pedidos</a></li>
-                            <li><a href="#"><i class="fas fa-heart"></i> Lista de Desejos</a></li>
-                            <li><a href="#"><i class="fas fa-bell"></i> Notificações</a></li>
-                            <li><a href="#"><i class="fas fa-cog"></i> Preferências</a></li>
-                            <li class="logout"><a href="../login/login.php"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
-                            <!-- Outros itens do menu -->
-                        </ul>
-                    </div>
-
-                    <div class="account-content">
-                        <div class="content-section active" id="personal-data">
-                            <h2 class="section-title">Dados Pessoais</h2>
-                            
-                            <?php if(isset($_SESSION['mensagem_sucesso'])): ?>
-                                <div class="alert alert-success">
-                                    <?php echo $_SESSION['mensagem_sucesso']; unset($_SESSION['mensagem_sucesso']); ?>
-                                </div>
-                            <?php endif; ?>
-                            
-                            <?php if(isset($_SESSION['mensagem_erro'])): ?>
-                                <div class="alert alert-error">
-                                    <?php echo $_SESSION['mensagem_erro']; unset($_SESSION['mensagem_erro']); ?>
-                                </div>
-                            <?php endif; ?>
-                            
-                            <div class="account-card">
-                                <form class="account-form" method="POST" action="processaDadosPessoais.php">
-                                    <input type="hidden" name="idUsuario" value="<?php echo $_SESSION['usuario_id']; ?>">
-                                    
-                                    <div class="form-row">
-                                        <div class="form-group">
-                                            <label for="nome">Nome</label>
-                                            <input type="text" id="nome" name="nome" class="purple-input" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="sobrenome">Sobrenome</label>
-                                            <input type="text" id="sobrenome" name="sobrenome" class="purple-input" required>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="form-row">
-                                        <div class="form-group">
-                                            <label for="email">E-mail</label>
-                                            <input type="email" id="email" name="email" class="purple-input" required>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="form-group password-group">
-                                        <label for="senha">Alterar Senha</label>
-                                        <input type="password" id="senha" name="senha" class="purple-input" placeholder="Deixe em branco para manter a senha atual">
-                                    </div>
-                                    
-                                    <div class="form-actions">
-                                        <button type="submit" class="btn-primary">Salvar Alterações</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
+    <div class="account-container">
+        <div class="sidebar">
+            <div class="user-info">
+                <div class="user-avatar">
+                    <img src="/api/placeholder/100/100" alt="Foto do Usuário">
+                    <div class="edit-avatar">
+                        <i class="fas fa-camera"></i>
                     </div>
                 </div>
-            <!-- FIM DADOS PESSOAIS -->
+                <h3>Olá, <?php echo htmlspecialchars($usuario['nome'] . ' ' . $usuario['sobrenome']); ?></h3>
+            </div>
+            <ul class="account-menu">
+                <li class="active"><a href="#"><i class="fas fa-user-circle"></i> Dados Pessoais</a></li>
+                <li><a href="#"><i class="fas fa-map-marker-alt"></i> Endereços</a></li>
+                <li><a href="#"><i class="fas fa-shopping-bag"></i> Meus Pedidos</a></li>
+                <li><a href="#"><i class="fas fa-heart"></i> Lista de Desejos</a></li>
+                <li><a href="#"><i class="fas fa-bell"></i> Notificações</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> Preferências</a></li>
+                <li class="logout"><a href="../login/login.php"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
+            </ul>
+        </div>
 
-
+        <div class="account-content">
+            <div class="content-section active" id="personal-data">
+                <h2 class="section-title">Dados Pessoais</h2>
+                
+                <?php if(isset($_SESSION['mensagem_sucesso'])): ?>
+                    <div class="alert alert-success">
+                        <?php echo $_SESSION['mensagem_sucesso']; unset($_SESSION['mensagem_sucesso']); ?>
+                    </div>
+                <?php endif; ?>
+                
+                <?php if(isset($_SESSION['mensagem_erro'])): ?>
+                    <div class="alert alert-error">
+                        <?php echo $_SESSION['mensagem_erro']; unset($_SESSION['mensagem_erro']); ?>
+                    </div>
+                <?php endif; ?>
+                
+                <div class="account-card">
+                    <form class="account-form" method="POST" action="processaDadosPessoais.php">
+                        <input type="hidden" name="idUsuario" value="<?php echo $_SESSION['usuario_id']; ?>">
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="nome">Nome</label>
+                                <input type="text" id="nome" name="nome" class="purple-input" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="sobrenome">Sobrenome</label>
+                                <input type="text" id="sobrenome" name="sobrenome" class="purple-input" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">E-mail</label>
+                                <input type="email" id="email" name="email" class="purple-input" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group password-group">
+                            <label for="senha">Alterar Senha</label>
+                            <input type="password" id="senha" name="senha" class="purple-input" placeholder="Deixe em branco para manter a senha atual">
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="submit" class="btn-primary">Salvar Alterações</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
             <div class="content-section" id="addresses">
                 <h2 class="section-title">Meus Endereços</h2>
                 <div class="account-card">
@@ -146,11 +140,7 @@ $usuario = $resultado->fetch_assoc();
                                 <span class="address-badge default">Principal</span>
                             </div>
                             <div class="address-body">
-                                <p><strong>Rua:</strong> Avenida Paulista, 1000</p>
-                                <p><strong>Bairro:</strong> Bela Vista</p>
-                                <p><strong>Cidade/UF:</strong> São Paulo - SP</p>
-                                <p><strong>CEP:</strong> 01310-100</p>
-                                <p><strong>Complemento:</strong> Apto 101</p>
+                                
                             </div>
                             <div class="address-actions">
                                 <button class="address-btn edit-btn"><i class="fas fa-edit"></i> Editar</button>
@@ -163,11 +153,7 @@ $usuario = $resultado->fetch_assoc();
                                 <h3>Endereço do Trabalho</h3>
                             </div>
                             <div class="address-body">
-                                <p><strong>Rua:</strong> Rua Augusta, 500</p>
-                                <p><strong>Bairro:</strong> Consolação</p>
-                                <p><strong>Cidade/UF:</strong> São Paulo - SP</p>
-                                <p><strong>CEP:</strong> 01304-000</p>
-                                <p><strong>Complemento:</strong> Sala 305</p>
+                                
                             </div>
                             <div class="address-actions">
                                 <button class="address-btn edit-btn"><i class="fas fa-edit"></i> Editar</button>
@@ -275,6 +261,11 @@ $usuario = $resultado->fetch_assoc();
                     </div>
                 </div>
             </div>
+        </div>
+            
+    </div>
+                <!-- FIM DADOS PESSOAIS -->
+            
         </div>
     </div>
 
