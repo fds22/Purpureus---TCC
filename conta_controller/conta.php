@@ -374,7 +374,7 @@ function searchCep() {
     searchBtn.disabled = true;
     
     
-    fetch(`/api/consulta-cep/api.php?cep=${cep}`)
+    fetch("https://viacep.com.br/ws/$cep/json/".replace('$cep', cep))
         .then(response => {
             if (!response.ok) {
                 throw new Error('Erro na requisição');
