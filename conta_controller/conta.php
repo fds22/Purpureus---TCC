@@ -56,6 +56,10 @@ $usuario = $resultado->fetch_assoc();
             <a href="../favoritos_controller/favoritos.html" class="icon"><i class="fas fa-heart"></i></a>
             <a href="../carrinho_controller/carrinho.html" class="icon cart-icon"><i class="fas fa-shopping-bag"></i><span class="cart-count">0</span></a>
         </div>
+
+        <div class="user-info">
+            <span>Olá, <?php echo htmlspecialchars($_SESSION['usuario_nome']); ?></span>
+        </div>
     </header>
                                 <!-- DADOS PESSOAS-->      
     <div class="account-container">
@@ -143,98 +147,78 @@ $usuario = $resultado->fetch_assoc();
                 
                     <div class="address-form-container" id="address-form" style="display: none;">
                         <h3>Novo Endereço</h3>
-                        <form class="address-form">
+                        <form id="address-form" class="address-form" method="POST" action="endereco.php" multipart="multipart/form-data">
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="address-name">Nome do Endereço</label>
-                                    <input type="text" id="address-name" placeholder="Ex: Casa, Trabalho" class="purple-input">
+                                    <input type="text" id="address-name" name="nome_endereco" placeholder="Ex: Casa, Trabalho" class="purple-input" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="cep">CEP</label>
                                     <div class="cep-input-group">
-                                        <input type="text" id="cep" placeholder="00000-000" class="purple-input">
+                                        <input type="text" id="cep" name="cep" placeholder="00000-000" class="purple-input" required>
                                         <button type="button" id="search-cep" class="btn-cep">Buscar</button>
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="street">Rua</label>
-                                    <input type="text" id="street" class="purple-input">
+                                    <input type="text" id="street" name="rua" class="purple-input" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="number">Número</label>
-                                    <input type="text" id="number" class="purple-input">
+                                    <input type="text" id="number" name="numero" class="purple-input" required>
                                 </div>
                             </div>
-                            
+
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="complement">Complemento</label>
-                                    <input type="text" id="complement" placeholder="Opcional" class="purple-input">
+                                    <input type="text" id="complement" name="complemento" placeholder="Opcional" class="purple-input">
                                 </div>
                                 <div class="form-group">
                                     <label for="neighborhood">Bairro</label>
-                                    <input type="text" id="neighborhood" class="purple-input">
+                                    <input type="text" id="neighborhood" name="bairro" class="purple-input" required>
                                 </div>
                             </div>
-                            
+
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="city">Cidade</label>
-                                    <input type="text" id="city" class="purple-input">
+                                    <input type="text" id="city" name="cidade" class="purple-input" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="state">Estado</label>
-                                    <select id="state" class="purple-input">
+                                    <select id="state" name="estado" class="purple-input" required>
                                         <option value="">Selecione</option>
-                                        <option value="AC">Acre</option>
-                                        <option value="AL">Alagoas</option>
-                                        <option value="AP">Amapá</option>
-                                        <option value="AM">Amazonas</option>
-                                        <option value="BA">Bahia</option>
-                                        <option value="CE">Ceará</option>
-                                        <option value="DF">Distrito Federal</option>
-                                        <option value="ES">Espírito Santo</option>
-                                        <option value="GO">Goiás</option>
-                                        <option value="MA">Maranhão</option>
-                                        <option value="MT">Mato Grosso</option>
-                                        <option value="MS">Mato Grosso do Sul</option>
-                                        <option value="MG">Minas Gerais</option>
-                                        <option value="PA">Pará</option>
-                                        <option value="PB">Paraíba</option>
-                                        <option value="PR">Paraná</option>
-                                        <option value="PE">Pernambuco</option>
-                                        <option value="PI">Piauí</option>
-                                        <option value="RJ">Rio de Janeiro</option>
-                                        <option value="RN">Rio Grande do Norte</option>
-                                        <option value="RS">Rio Grande do Sul</option>
-                                        <option value="RO">Rondônia</option>
-                                        <option value="RR">Roraima</option>
-                                        <option value="SC">Santa Catarina</option>
                                         <option value="SP">São Paulo</option>
-                                        <option value="SE">Sergipe</option>
-                                        <option value="TO">Tocantins</option>
+                                        <option value="RJ">Rio de Janeiro</option>
+                                        <option value="MG">Minas Gerais</option>
+                                        <!-- Adicione os demais estados -->
                                     </select>
                                 </div>
                             </div>
-                            
+
                             <div class="form-group checkbox-group">
-                                <input type="checkbox" id="default-address">
+                                <input type="checkbox" id="default-address" name="principal">
                                 <label for="default-address">Definir como endereço principal</label>
                             </div>
-                            
+
                             <div class="form-actions">
                                 <button type="button" id="cancel-address" class="btn-secondary">Cancelar</button>
                                 <button type="submit" class="btn-primary">Salvar Endereço</button>
                             </div>
                         </form>
+
+                        <div id="mensagem"></div>
+
+
                     </div>
                 </div>
             </div>
         </div>
-            
     </div>
                 <!-- FIM DADOS PESSOAIS -->
             
@@ -468,6 +452,7 @@ function searchCep() {
             cep: cep,
             isDefault: document.getElementById('default-address').checked
         };
+
         
         addAddressToUI(newAddress);
         
@@ -528,6 +513,45 @@ function searchCep() {
             emailInput.value = "<?php echo htmlspecialchars($usuario['email'] ?? ''); ?>";
         <?php endif; ?>
     });
+
+    document.getElementById('address-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const dados = {
+        nome_endereco: document.getElementById('address-name').value,
+        cep: document.getElementById('cep').value,
+        rua: document.getElementById('street').value,
+        numero: document.getElementById('number').value,
+        complemento: document.getElementById('complement').value,
+        bairro: document.getElementById('neighborhood').value,
+        cidade: document.getElementById('city').value,
+        estado: document.getElementById('state').value,
+        principal: document.getElementById('default-address').checked
+    };
+
+
+    fetch('endereco.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(dados)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Dados:', dados);
+        const mensagem = document.getElementById('mensagem');
+        if (data.sucesso) {
+            mensagem.innerHTML = `<p style="color: green;">${data.mensagem}</p>`;
+            document.getElementById('address-form').reset();
+        } else {
+            mensagem.innerHTML = `<p style="color: red;">Erro: ${data.mensagem}</p>`;
+        }
+    })
+    .catch(error => {
+        console.error('Erro:', error);
+        document.getElementById('mensagem').innerHTML = `<p style="color: red;">Erro na requisição.</p>`;
+    });
+});
+
 </script>
 </body>
 </html>
